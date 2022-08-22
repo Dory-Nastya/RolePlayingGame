@@ -24,6 +24,7 @@ public class FantasyCharacter implements Fighter {
     @Override
     public int attack() {
         if (dexterity * 3 > getRandomValue()) return strength;
+        // Create critical attack
         else return 0;
     }
 
