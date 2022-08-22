@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class FantasyCharacter implements Fighter{
+public class FantasyCharacter implements Fighter {
     //Имя персонажа
     private String name;
     //Статы персонажа
@@ -19,6 +19,7 @@ public class FantasyCharacter implements Fighter{
         this.xp = xp;
         this.gold = gold;
     }
+
     //метод ведения боя
     @Override
     public int attack() {
@@ -26,7 +27,61 @@ public class FantasyCharacter implements Fighter{
         else return 0;
     }
 
+    //
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getHealthPoints() {
+        return healthPoints;
+    }
+
+    public void setHealthPoints(int healthPoints) {
+        this.healthPoints = healthPoints;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public int getDexterity() {
+        return dexterity;
+    }
+
+    public void setDexterity(int dexterity) {
+        this.dexterity = dexterity;
+    }
+
+    public int getXp() {
+        return xp;
+    }
+
+    public void setXp(int xp) {
+        this.xp = xp;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+
     private int getRandomValue() {
-        return (int) (Math.random()*100);
+        return (int) (Math.random() * 100);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s здоровье:%d",name, healthPoints);
     }
 }
