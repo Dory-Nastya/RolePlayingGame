@@ -6,8 +6,9 @@ public class Realm {
     //Класс для чтения введенных строк из консоли
     private static BufferedReader br;
     //Игрок должен храниться на протяжении всей игры
-    private static FantasyCharacter player = null;
+    public static FantasyCharacter player = null;
     //Класс для битвы можно не создавать каждый раз, а переиспользовать
+    private static Merchant merchant = new Merchant();
     private static BattleScene battleScene = null;
 
     public static void main(String[] args) {
@@ -43,7 +44,8 @@ public class Realm {
         //Варианты для команд
         switch (string) {
             case "1": {
-                System.out.println("Торговец еще не приехал");
+                commitGoods();
+
                 command(br.readLine());
             }
             break;
@@ -54,6 +56,14 @@ public class Realm {
             case "3":
                 System.exit(1);
                 break;
+            case "4":
+                System.out.println(merchant.sell(Merchant.Goods.POTION));
+               break;
+            case "5": {
+                printNavigation();
+                command(br.readLine());
+            }
+
             case "да":
                 command("2");
                 break;
@@ -66,7 +76,19 @@ public class Realm {
         command(br.readLine());
     }
 
-    private static void printNavigation() {
+    private static void commitGoods() {
+        System.out.println(String.format("Приветствую %s! Чего желаешь? В продаже есть эликсир здоровья, стоит всего 10 золотых монет", player.getName() ));
+        System.out.println("Желаете купить или отложить покупку? (4.купить/5.отложить)");
+        try {
+            command(br.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    static void printNavigation() {
         System.out.println("Куда вы хотите пойти?");
         System.out.println("1. К Торговцу");
         System.out.println("2. В темный лес");
@@ -82,7 +104,7 @@ public class Realm {
         battleScene.fight(player, createMonster(), new FightCallback() {
             @Override
             public void fightWin() {
-                System.out.println(String.format("%s победил! Теперь у вас %d опыта и %d золота, а также осталось %d едениц здоровья.", player.getName(), player.getXp(), player.getGold(), player.getHealthPoints()));
+                System.out.println(String.format("%s победил! Теперь у вас %d опыта и %d золота, а также осталось %d единиц здоровья.", player.getName(), player.getXp(), player.getGold(), player.getHealthPoints()));
                 System.out.println("Желаете продолжить поход или вернуться в город? (да/нет)");
                 try {
                     command(br.readLine());
