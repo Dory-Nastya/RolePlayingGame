@@ -45,7 +45,6 @@ public class Realm {
         switch (string) {
             case "1": {
                 commitGoods();
-
                 command(br.readLine());
             }
             break;
